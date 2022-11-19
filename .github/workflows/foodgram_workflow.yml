@@ -70,8 +70,5 @@ jobs:
             echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
             echo DB_HOST=${{ secrets.DB_HOST }} >> .env
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
-            echo DJANGO_SU_ADMIN=${{ secrets.DJANGO_SU_ADMIN }} >> .env
-            echo DJANGO_SU_EMAIL=${{ secrets.DJANGO_SU_EMAIL }} >> .env
-            echo DJANGO_SU_PASSWORD=${{ secrets.DJANGO_SU_PASSWORD }} >> .env
             sudo docker-compose up -d
 
