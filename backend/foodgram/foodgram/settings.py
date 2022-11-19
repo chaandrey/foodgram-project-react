@@ -1,5 +1,4 @@
 from pathlib import Path
-from datetime import timedelta
 
 import os
 
@@ -162,4 +161,3 @@ DJOSER = {
         'user_list': ['rest_framework.permissions.AllowAny', ],
     }
 }
-
