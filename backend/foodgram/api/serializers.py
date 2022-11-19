@@ -52,7 +52,7 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Recipe
-        fields = '__all__'
+        fields = "__all__"
 
         validators = [
             UniqueTogetherValidator(
@@ -171,7 +171,7 @@ class FollowSerializer(serializers.ModelSerializer):
     recipes_count = serializers.SerializerMethodField()
 
     class Meta:
-        fields = '__all__'
+        fields = "__all__"
         model = User
 
     def get_is_subscribed(self, obj):

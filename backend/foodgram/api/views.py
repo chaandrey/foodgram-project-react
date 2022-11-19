@@ -72,17 +72,16 @@ class RecipeViewSet(viewsets.ModelViewSet):
         )
 
         obj_dic = {
-            "file_name": "%s_%s.pdf"
-            % (
+            "file_name": "{}_{}.pdf".format(
                 dt.datetime.utcnow().strftime("%Y-%m-%d"),
                 self.request.user.username,
             ),
             "doc_title": "FOODGRAM",
             "title": "Shopping cart",
-            "user": "User: %s %s"
-            % (
+            "user": "User: {} {}".format(
                 self.request.user.last_name,
                 self.request.user.first_name,
+
             ),
             "text": [],
         }
