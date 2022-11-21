@@ -104,9 +104,6 @@ class Recipe(CreatedModel):
         verbose_name = "Рецепт"
         verbose_name_plural = "Рецепты"
 
-#    def get_absolute_url(self):
-#        return f"/posts/{self.pk}/"
-
     def __str__(self):
         return self.name[:15]
 

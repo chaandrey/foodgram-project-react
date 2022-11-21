@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'api',
     'users',
     'recipes',
-    'utils',
 ]
 
 AUTH_USER_MODEL = "users.User"
