@@ -9,7 +9,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         print('Uploading ingredients.csv to Ingredient table')
-        fhand = open('../../data/ingredients.csv')
+        fhand = open('ingredients.csv')
         reader = csv.reader(fhand)
 
         for row in reader:
