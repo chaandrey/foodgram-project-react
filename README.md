@@ -2,13 +2,13 @@
 #  IP 84.252.131.104
 ![example workflow](https://github.com/chaandrey/foodgram-project-react/actions/workflows/foodgram_workflow.yml/badge.svg)
 
-Описание. 
+# Описание. 
 
 
 С помощью сервиса Foodgram можно публиковать рецепты, подписываться на других пользователей, фильтровать рецепты по тегам, добавлять понравившиеся рецепты в избранное и скачивать файл со списком продуктов.
 
 
-Установка.
+# Установка.
 
 
 Для того чтобы развернуть проект, следуйте инструкции:
@@ -64,92 +64,49 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+# Запуск проекта в Docker контейнере
 
+Установите Docker.
 
+Параметры запуска описаны в файлах docker-compose.yml и nginx.conf которые находятся в директории infra/.
+При необходимости добавьте/измените адреса проекта в файле nginx.conf
 
-Примеры.
-
-Для того чтобы получить доступ к полному функционалу , пользователь должен зарегестрироваться и получить JWT токен:
-
+Запустите docker compose:
 ```
-POST /api/v1/jwt/create/
-```
-BODY:
-```
-{
-  "username": "username",
-  "password": "password"
-}
+docker-compose up -d --build
 ```
 
-Зарегистрированный пользователь может создавать новые посты:
+После сборки появляются 3 контейнера:
 
-```
-POST /api/v1/posts/
-```
-BODY:
-```
-{
-  "text": "Post text"
-}
-```
-Редактировать / удалять уже существующие посты ( автор поста должен быть тот же пользователь , кто редактирует/удаляет):
+- контейнер базы данных db
+- контейнер приложения backend
+- контейнер web-сервера nginx
 
-```
-DELETE /api/v1/posts/1/
-```
-BODY:
-```
-{
-  "id": "Post id"
-}
+Примените миграции:
+
+docker-compose exec backend python manage.py migrate
 ```
 
-
-Добавлять комментарии:
-
-```
-POST /api/v1/posts/1/comments/
-```
-BODY:
-```
-{
-  "test": "New Comment"
-}
-```
-
-Подписаться на другого пользователя
-```
-POST /api/v1/follow/
-```
-BODY:
-```
-{
-  "following": "author"
-}
-```
-
-
-
-Анонимный пользователь имеет только read only права.
-
-
-Запрос всех постов :
+Загрузите ингредиенты:
 
 ```
-GET /api/v1/posts/
+docker-compose exec backend python manage.py load_ingrs
 ```
 
-
-Запрос поста по его id.
-
-```
-GET /api/v1/posts/1
-```
-
-
-Запрос комментариев
+Загрузите теги:
 
 ```
-GET /api/v1/posts/1/comments/
+docker-compose exec backend python manage.py load_tags
 ```
+
+Создайте администратора:
+
+```
+docker-compose exec backend python manage.py createsuperuser
+```
+
+Соберите статику:
+```
+docker-compose exec backend python manage.py collectstatic --noinput
+```
+
