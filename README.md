@@ -72,6 +72,7 @@ python manage.py runserver
 При необходимости добавьте/измените адреса проекта в файле nginx.conf
 
 Запустите docker compose:
+
 ```
 docker-compose up -d --build
 ```
@@ -84,6 +85,7 @@ docker-compose up -d --build
 
 Примените миграции:
 
+```
 docker-compose exec backend python manage.py migrate
 ```
 
