@@ -91,6 +91,7 @@ class RecipeSerializer(serializers.ModelSerializer):
             )
         lst_unique_ingredients = []
         for ingredient_item in self.initial_data["ingredients"]:
+            print(ingredient_item)
             try:
                 ingredient = Ingredient.objects.get(id=ingredient_item["id"])
             except ObjectDoesNotExist:
