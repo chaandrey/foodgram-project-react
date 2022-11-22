@@ -125,13 +125,12 @@ class RecipeViewSet(viewsets.ModelViewSet):
         favorite_recipe = FavoriteRecipe.objects.get(
             recipe=recipe_by_id, user=self.request.user
         )
-        # if not favorite_recipe.shopping_cart:
-        #    if not favorite_recipe.favorite:
-        #        raise ValidationError(
-        #            detail={"error": ["No such recipe."]}
-        #        )
+        if not favorite_recipe.shopping_cart:
+            if not favorite_recipe.favorite:
+                raise ValidationError(
+                    detail={"error": ["No such recipe."]}
+                )
         favorite_recipe.shopping_cart = False
-        favorite_recipe.favorite = False
         favorite_recipe.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -159,9 +158,9 @@ class RecipeViewSet(viewsets.ModelViewSet):
         favorite_recipe = FavoriteRecipe.objects.get(
             recipe=recipe_by_id, user=self.request.user
         )
-        if not favorite_recipe.shopping_cart:
+        if not favorite_recipe.favorite:
             raise ValidationError(
-                detail={"error": ["No such recipe."]}
+                detail={"error": ["Is not favorite."]}
             )
         favorite_recipe.favorite = False
         favorite_recipe.save()
